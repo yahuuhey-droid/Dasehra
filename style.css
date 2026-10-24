@@ -1,0 +1,1308 @@
+/* ===================================================
+   शुभ दशहरा (Dussehra - Ravan Vadh) Stylesheet
+   Festive, Epic, Modern & Responsive
+=================================================== */
+
+:root {
+    --primary-gold: #FFD700;
+    --secondary-gold: #F39C12;
+    --saffron: #FF6B1A;
+    --deep-orange: #E64A19;
+    --celestial-blue: #1E3799;
+    --dark-bg: #0A0E17;
+    --card-bg: rgba(18, 24, 38, 0.85);
+    --gold-glow: 0 0 25px rgba(255, 215, 0, 0.6), 0 0 50px rgba(255, 107, 26, 0.4);
+    --red-glow: 0 0 25px rgba(231, 76, 60, 0.7);
+    --text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Background Night Sky & Atmospheric layers */
+.stars-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 50% 0%, #151a33 0%, #0d1222 55%, #060810 100%);
+    z-index: -3;
+    overflow: hidden;
+}
+
+.css-star {
+    position: absolute;
+    background: #FFFFFF;
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: opacity;
+    contain: strict;
+    animation: starTwinkle var(--twinkle-dur, 3s) infinite ease-in-out var(--twinkle-del, 0s);
+}
+
+@keyframes starTwinkle {
+    0%, 100% { opacity: var(--star-min-op, 0.2); }
+    50% { opacity: 0.95; }
+}
+
+.clouds-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: radial-gradient(circle at 50% 20%, rgba(255, 154, 60, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: -2;
+}
+
+/* Divine Full Moon (Sharad Purnima / Dussehra Glow) */
+.divine-moon {
+    position: fixed;
+    top: 35px;
+    right: 8%;
+    width: 90px;
+    height: 90px;
+    background: radial-gradient(circle, #FFFDF0 20%, #FFEAA7 60%, rgba(255, 234, 167, 0) 75%);
+    border-radius: 50%;
+    box-shadow: 0 0 35px rgba(255, 234, 167, 0.75), 0 0 70px rgba(255, 159, 67, 0.35);
+    pointer-events: none;
+    z-index: -1;
+    will-change: transform, opacity;
+    animation: moonPulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes moonPulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    100% { transform: scale(1.05); opacity: 1; }
+}
+
+/* Subtle Celestial Sky Watermark (Dhundhla lekin clearly visible) */
+.sky-watermark {
+    position: fixed;
+    top: 24%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Cinzel', 'Poppins', sans-serif;
+    font-size: clamp(1.8rem, 7vw, 4.8rem);
+    font-weight: 800;
+    letter-spacing: clamp(5px, 1.6vw, 16px);
+    text-transform: uppercase;
+    color: rgba(255, 235, 175, 0.18);
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.22), 0 0 45px rgba(255, 159, 67, 0.15);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    z-index: -2;
+    text-align: center;
+}
+
+/* Canvas Overlay for Fire, Embers, Arrow Trajectory & Fireworks */
+#fxCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Sound Controller Floating Pill */
+.sound-btn {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 100;
+    background: rgba(18, 24, 38, 0.85);
+    border: 1.5px solid var(--primary-gold);
+    color: var(--primary-gold);
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.sound-btn:hover {
+    background: var(--primary-gold);
+    color: #121826;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    transform: translateY(-2px);
+}
+
+.sound-btn.muted {
+    border-color: #718096;
+    color: #A0AEC0;
+}
+
+/* Main Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 16px 60px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Festive Header */
+.festive-header {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 24px;
+}
+
+.om-symbol {
+    font-size: 1.25rem;
+    color: var(--saffron);
+    letter-spacing: 8px;
+    text-shadow: 0 0 12px rgba(255, 107, 26, 0.8);
+    margin-bottom: 4px;
+    animation: pulseSymbol 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulseSymbol {
+    0% { opacity: 0.7; transform: scale(0.96); }
+    100% { opacity: 1; transform: scale(1.05); }
+}
+
+.main-title .hindi-title {
+    display: block;
+    font-family: 'Rozha One', 'Yatra One', serif;
+    font-size: clamp(2rem, 6vw, 3.8rem);
+    background: linear-gradient(180deg, #FFFFFF 0%, #FFEAA7 40%, #FFA502 75%, #FF6B1A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 3px 12px rgba(255, 107, 26, 0.5));
+    line-height: 1.15;
+    letter-spacing: 1px;
+}
+
+.main-title .sub-title {
+    display: block;
+    font-size: clamp(0.85rem, 2.4vw, 1.15rem);
+    color: #F1F2F6;
+    opacity: 0.9;
+    margin-top: 6px;
+    font-weight: 400;
+    text-shadow: var(--text-shadow);
+}
+
+/* Dynamic Personalized Greeting Banner */
+.greeting-banner {
+    margin-top: 14px;
+    background: linear-gradient(135deg, rgba(255, 107, 26, 0.25), rgba(255, 215, 0, 0.15));
+    border: 1.5px solid rgba(255, 215, 0, 0.45);
+    border-radius: 16px;
+    padding: 10px 24px;
+    display: inline-block;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    animation: bannerGlow 3s infinite alternate;
+}
+
+@keyframes bannerGlow {
+    0% { border-color: rgba(255, 215, 0, 0.4); box-shadow: 0 0 15px rgba(255, 215, 0, 0.2); }
+    100% { border-color: rgba(255, 107, 26, 0.7); box-shadow: 0 0 25px rgba(255, 107, 26, 0.4); }
+}
+
+.greeting-text {
+    font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+    color: #FFEAA7;
+}
+
+.sender-name {
+    font-weight: 700;
+    color: #FFF;
+    border-bottom: 2px dashed var(--primary-gold);
+    padding: 0 4px;
+}
+
+.happy-dussehra-text {
+    font-family: 'Yatra One', cursive;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    color: var(--primary-gold);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+    margin-top: 2px;
+}
+
+/* ===================================================
+   Battle Arena (Left: Rama, Right: Ravan)
+=================================================== */
+.battle-arena {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    height: 480px;
+    margin: 10px 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    background: linear-gradient(180deg, rgba(20, 26, 44, 0.4) 0%, rgba(10, 14, 23, 0.9) 85%);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), inset 0 0 60px rgba(255, 107, 26, 0.08);
+    overflow: hidden;
+    padding: 0 40px 20px;
+}
+
+/* Ground */
+.ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 38px;
+    background: linear-gradient(180deg, #3D1C06 0%, #1E0E03 100%);
+    border-top: 3px solid #8E44AD;
+    border-image: linear-gradient(90deg, #E67E22, #F1C40F, #E74C3C) 1;
+    z-index: 2;
+}
+
+/* Festive Mashals (Torches) */
+.mashal {
+    position: absolute;
+    bottom: 30px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mashal-left { left: 24px; }
+.mashal-right { right: 24px; }
+
+.mashal-stick {
+    width: 12px;
+    height: 120px;
+    background: linear-gradient(90deg, #5D4037, #3E2723);
+    border-radius: 3px;
+    border: 1px solid #8D6E63;
+}
+
+.mashal-flame {
+    width: 22px;
+    height: 38px;
+    background: radial-gradient(ellipse at 50% 80%, #FFF 0%, #FFD700 35%, #FF4757 70%, transparent 100%);
+    border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+    box-shadow: 0 -5px 25px #FF6B1A, 0 0 15px #FFD700;
+    animation: flameFlicker 0.4s infinite alternate ease-in-out;
+}
+
+@keyframes flameFlicker {
+    0% { transform: scaleY(1) scaleX(1) rotate(-2deg); opacity: 0.9; }
+    50% { transform: scaleY(1.15) scaleX(0.92) rotate(2deg); opacity: 1; }
+    100% { transform: scaleY(0.95) scaleX(1.05) rotate(-1deg); opacity: 0.95; }
+}
+
+/* Character Boxes */
+.character-box {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.rama-box {
+    width: 270px;
+    height: 380px;
+}
+
+.ravan-box {
+    width: 380px;
+    height: 420px;
+}
+
+/* SVGs Styling */
+.rama-svg-wrapper, .ravan-svg-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rama-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 15px rgba(255, 234, 167, 0.4));
+    transition: transform 0.3s ease;
+}
+
+.ravan-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 18px rgba(231, 76, 60, 0.35));
+    transition: transform 0.3s ease;
+}
+
+/* Divine Auras */
+.divine-aura {
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    top: 10px;
+    left: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 223, 0, 0.22) 0%, rgba(255, 107, 26, 0.08) 60%, transparent 80%);
+    pointer-events: none;
+    z-index: -1;
+    will-change: transform, opacity;
+    animation: divineGlowAura 4s infinite alternate;
+}
+
+@keyframes divineGlowAura {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    100% { transform: scale(1.08); opacity: 0.95; }
+}
+
+.ravan-dark-aura {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    top: 20px;
+    right: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(231, 76, 60, 0.25) 0%, rgba(109, 33, 79, 0.15) 60%, transparent 80%);
+    pointer-events: none;
+    z-index: -1;
+    animation: demonGlowAura 3s infinite alternate;
+}
+
+@keyframes demonGlowAura {
+    0% { transform: scale(0.9); opacity: 0.6; }
+    100% { transform: scale(1.12); opacity: 0.9; }
+}
+
+/* Pulsing tip on Rama's Brahmastra */
+.pulsing-tip {
+    animation: tipFlicker 0.4s infinite alternate;
+}
+
+@keyframes tipFlicker {
+    0% { r: 9px; opacity: 0.8; }
+    100% { r: 12px; opacity: 1; }
+}
+
+/* Navel (Nabhi) Target Ring on Ravana */
+.navel-pulse-ring {
+    animation: navelPulse 1.2s infinite ease-in-out;
+    transform-origin: center;
+}
+
+@keyframes navelPulse {
+    0% { r: 10px; opacity: 0.9; stroke-width: 2; }
+    50% { r: 24px; opacity: 0.4; stroke-width: 3; }
+    100% { r: 10px; opacity: 0.9; stroke-width: 2; }
+}
+
+/* Name tags */
+.name-tag {
+    margin-top: -10px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.ram-tag {
+    background: linear-gradient(90deg, rgba(230, 126, 34, 0.9), rgba(241, 196, 15, 0.9));
+    border: 1px solid #FFEAA7;
+    color: #1A1A1A;
+}
+
+.ravan-tag {
+    background: linear-gradient(90deg, rgba(142, 68, 173, 0.9), rgba(192, 57, 43, 0.9));
+    border: 1px solid #E74C3C;
+    color: #FFF;
+}
+
+/* VS Badge in Middle */
+.vs-badge {
+    position: absolute;
+    left: 48%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    width: 52px;
+    height: 52px;
+    background: radial-gradient(circle, #E74C3C 0%, #8E0000 100%);
+    border: 2px solid var(--primary-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-weight: 800;
+    font-size: 1.15rem;
+    color: var(--primary-gold);
+    box-shadow: 0 0 25px rgba(231, 76, 60, 0.7);
+    z-index: 5;
+    animation: vsPulse 2s infinite alternate;
+}
+
+@keyframes vsPulse {
+    0% { transform: translate(-50%, -50%) scale(0.95); box-shadow: 0 0 15px rgba(255, 71, 87, 0.5); }
+    100% { transform: translate(-50%, -50%) scale(1.08); box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+}
+
+/* ===================================================
+   Sky Victory Banner ("सत्य की जीत, असत्य की हार!")
+=================================================== */
+.sky-victory-banner {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    text-align: center;
+    z-index: 7;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 90%;
+    max-width: 680px;
+}
+
+.sky-victory-banner.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.sky-tagline {
+    font-size: clamp(0.9rem, 2.4vw, 1.25rem);
+    color: #FFEAA7;
+    letter-spacing: 4px;
+    font-weight: 700;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+    margin-bottom: 8px;
+    animation: pulseSymbol 2s infinite alternate;
+}
+
+.sky-main-title {
+    font-family: 'Rozha One', 'Yatra One', serif;
+    font-size: clamp(1.8rem, 5.5vw, 3.4rem);
+    background: linear-gradient(180deg, #FFFFFF 0%, #FFF275 30%, #FFD700 65%, #FF4757 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.9)) drop-shadow(0 0 45px rgba(255, 71, 87, 0.7));
+    letter-spacing: 1.5px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    will-change: transform;
+    animation: goldGleam 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes goldGleam {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.03); }
+}
+
+.sky-sub-slogan {
+    font-size: clamp(0.95rem, 2.5vw, 1.35rem);
+    color: #FFFFFF;
+    font-weight: 600;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 15px #FF6B1A;
+}
+
+.sky-diyas {
+    font-size: 1.8rem;
+    margin-top: 10px;
+    letter-spacing: 12px;
+    animation: diyaFlicker 1.5s infinite alternate;
+}
+
+@keyframes diyaFlicker {
+    0% { transform: scale(0.95); opacity: 0.85; }
+    100% { transform: scale(1.06); opacity: 1; }
+}
+
+.divine-sunburst {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 480px;
+    height: 480px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.35) 0%, rgba(255, 107, 26, 0.15) 45%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+    animation: rotateSunburst 25s linear infinite;
+}
+
+@keyframes rotateSunburst {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Ravana Speech Bubble */
+.ravan-speech {
+    position: absolute;
+    top: -30px;
+    right: 20px;
+    background: rgba(26, 18, 28, 0.92);
+    border: 1.5px solid #FF4757;
+    border-radius: 12px;
+    padding: 6px 14px;
+    font-size: 0.82rem;
+    color: #FFEAA7;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    animation: speechBounce 2.5s infinite ease-in-out;
+    pointer-events: none;
+    z-index: 8;
+}
+
+.ravan-speech::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 40px;
+    border-width: 8px 8px 0;
+    border-style: solid;
+    border-color: #FF4757 transparent transparent;
+    display: block;
+    width: 0;
+}
+
+@keyframes speechBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+/* Evil eyes pulsing in Ravana */
+.evil-eye {
+    animation: evilEyeFlicker 1.8s infinite alternate;
+}
+
+@keyframes evilEyeFlicker {
+    0% { opacity: 0.7; fill: #C0392B; }
+    100% { opacity: 1; fill: #FF0000; }
+}
+
+/* ===================================================
+   Action Control Panel (The Shoot Button)
+=================================================== */
+.action-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px 0 25px;
+    width: 100%;
+}
+
+.shoot-btn {
+    position: relative;
+    background: linear-gradient(135deg, #FF6B1A 0%, #FFA502 50%, #FF4757 100%);
+    border: 2px solid #FFF275;
+    border-radius: 50px;
+    padding: 16px 38px;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(255, 107, 26, 0.5), 0 0 35px rgba(255, 215, 0, 0.4);
+    transition: all 0.25s ease-out;
+    overflow: hidden;
+}
+
+.shoot-btn:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 15px 40px rgba(255, 71, 87, 0.7), 0 0 50px rgba(255, 215, 0, 0.8);
+    border-color: #FFFFFF;
+}
+
+.shoot-btn:active {
+    transform: translateY(2px) scale(0.98);
+}
+
+.shoot-btn .btn-icon {
+    font-size: 2.2rem;
+    filter: drop-shadow(0 0 8px #FFF);
+    animation: arrowShake 1.8s infinite ease-in-out;
+}
+
+@keyframes arrowShake {
+    0%, 100% { transform: rotate(0deg); }
+    30% { transform: rotate(-8deg); }
+    70% { transform: rotate(8deg); }
+}
+
+.shoot-btn .btn-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.shoot-btn .btn-text strong {
+    font-family: 'Rozha One', 'Yatra One', serif;
+    font-size: clamp(1.15rem, 3.2vw, 1.45rem);
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.shoot-btn .btn-text small {
+    font-size: 0.8rem;
+    color: #FFF9E6;
+    opacity: 0.9;
+}
+
+.btn-glow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    transform: skewX(-25deg);
+    animation: shineSweep 3.5s infinite;
+}
+
+@keyframes shineSweep {
+    0% { left: -100%; }
+    30%, 100% { left: 160%; }
+}
+
+/* Battle Status Line */
+.battle-status {
+    margin-top: 12px;
+    font-size: 0.92rem;
+    color: #FFEAA7;
+    background: rgba(18, 24, 38, 0.6);
+    padding: 6px 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 215, 0, 0.25);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-shadow: 0 1px 2px #000;
+}
+
+/* ===================================================
+   Share & Festive Wishing Card
+=================================================== */
+.share-card {
+    width: 100%;
+    max-width: 680px;
+    background: var(--card-bg);
+    border: 1.5px solid rgba(255, 215, 0, 0.35);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), inset 0 0 30px rgba(255, 107, 26, 0.05);
+    text-align: center;
+    margin-bottom: 25px;
+    backdrop-filter: blur(10px);
+}
+
+.greeting-highlight-card {
+    background: linear-gradient(145deg, rgba(26, 32, 53, 0.95), rgba(15, 20, 35, 0.95));
+    border: 2px solid var(--primary-gold);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 215, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.greeting-highlight-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--primary-gold), #FF6B1A, var(--primary-gold), transparent);
+}
+
+.festive-diya-row {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    letter-spacing: 12px;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+    animation: diyaFlicker 2s infinite alternate;
+}
+
+.festive-wishing-title {
+    font-family: 'Rozha One', 'Yatra One', serif;
+    font-size: clamp(1.35rem, 4vw, 1.85rem);
+    color: var(--primary-gold);
+    line-height: 1.4;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #FFFDF0 0%, #FFD700 45%, #FFA502 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.festive-wishing-subtitle {
+    font-size: clamp(0.9rem, 2.4vw, 1.05rem);
+    color: #FFEAA7;
+    margin-bottom: 22px;
+    font-weight: 400;
+}
+
+.card-title {
+    font-family: 'Rozha One', serif;
+    font-size: clamp(1.2rem, 3.2vw, 1.5rem);
+    color: var(--primary-gold);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+.card-subtitle {
+    font-size: 0.9rem;
+    color: #CBD5E0;
+    margin-bottom: 18px;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    max-width: 500px;
+    margin: 0 auto 18px;
+}
+
+.input-wrapper {
+    position: relative;
+    flex: 1;
+}
+
+.input-wrapper i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondary-gold);
+    font-size: 1rem;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 12px 14px 12px 40px;
+    background: rgba(10, 14, 23, 0.8);
+    border: 1.5px solid rgba(255, 215, 0, 0.3);
+    border-radius: 12px;
+    color: #FFF;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.input-wrapper input:focus {
+    border-color: var(--primary-gold);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+    background: rgba(10, 14, 23, 0.95);
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, #F39C12, #E67E22);
+    border: 1px solid #FFEAA7;
+    color: #FFF;
+    font-weight: 600;
+    padding: 0 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    transition: all 0.25s;
+    white-space: nowrap;
+}
+
+.primary-btn:hover {
+    background: linear-gradient(135deg, #FFA502, #FF6B1A);
+    box-shadow: 0 4px 15px rgba(255, 107, 26, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Share Action Buttons */
+.share-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.whatsapp-btn, .copy-btn, .replay-btn {
+    border: none;
+    border-radius: 30px;
+    padding: 12px 22px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.25s;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.whatsapp-btn {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: #FFF;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+.whatsapp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+}
+
+.copy-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFEAA7;
+    border: 1.5px solid rgba(255, 215, 0, 0.4);
+}
+
+.copy-btn:hover {
+    background: rgba(255, 215, 0, 0.15);
+    border-color: var(--primary-gold);
+    transform: translateY(-2px);
+}
+
+.replay-btn {
+    background: linear-gradient(135deg, #3742fa, #2f3542);
+    color: #FFF;
+    border: 1.5px solid #70a1ff;
+}
+
+.replay-btn:hover {
+    box-shadow: 0 6px 20px rgba(55, 66, 250, 0.4);
+    transform: translateY(-2px);
+}
+
+/* Toast Alert */
+.toast-alert {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 15px;
+    padding: 8px 16px;
+    background: rgba(46, 204, 113, 0.2);
+    border: 1px solid #2ECC71;
+    border-radius: 10px;
+    color: #2ECC71;
+    font-size: 0.88rem;
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Dussehra Shloka Card */
+.shloka-card {
+    max-width: 680px;
+    width: 100%;
+    background: rgba(18, 24, 38, 0.6);
+    border-left: 4px solid var(--primary-gold);
+    padding: 16px 20px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.shloka-quote {
+    font-family: 'Rozha One', serif;
+    font-size: 1.05rem;
+    color: #FFEAA7;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.shloka-meaning {
+    font-size: 0.85rem;
+    color: #CBD5E0;
+    line-height: 1.5;
+}
+
+/* Footer */
+.festive-footer {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #A0AEC0;
+    letter-spacing: 1px;
+}
+
+/* ===================================================
+   Ravan Vadh Destruction Dynamic CSS Classes
+=================================================== */
+
+/* Rama Bow Draw Animation State */
+.rama-drawing {
+    animation: ramaAim 0.5s forwards ease-out;
+}
+
+@keyframes ramaAim {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.04) translateX(5px); }
+    100% { transform: scale(1.02); }
+}
+
+/* Rama Peaceful / Normal Stance after Ravan Vadh */
+.rama-peaceful {
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 30px rgba(255, 234, 167, 0.8));
+    transition: all 0.8s ease;
+}
+
+#ramaPeacefulPose {
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#ramaCombatPose {
+    transition: opacity 0.4s ease-out;
+}
+
+.blessing-glow {
+    will-change: transform, opacity;
+    animation: blessingPulse 2.2s infinite alternate ease-in-out;
+}
+
+@keyframes blessingPulse {
+    0% { transform: scale(0.85); opacity: 0.5; }
+    100% { transform: scale(1.15); opacity: 0.95; }
+}
+
+/* Ravan Shaking & Dying */
+.ravan-burning {
+    animation: ravanTremble 0.1s infinite alternate;
+}
+
+@keyframes ravanTremble {
+    0% { transform: translate(-3px, 2px) rotate(-1deg); }
+    50% { transform: translate(3px, -2px) rotate(1.5deg); }
+    100% { transform: translate(-2px, -3px) rotate(-0.5deg); }
+}
+
+.ravan-crumble {
+    animation: ravanVanish 3.5s forwards cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+@keyframes ravanVanish {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 35px #FF3838) brightness(1.5);
+        opacity: 1;
+    }
+    40% {
+        transform: scale(0.95) translateY(20px);
+        filter: drop-shadow(0 0 60px #FF9F43) brightness(2) contrast(1.5);
+    }
+    70% {
+        transform: scale(0.7) translateY(90px) rotate(4deg);
+        filter: brightness(0.4) blur(2px);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(0.3) translateY(220px);
+        filter: brightness(0.1) blur(8px);
+        opacity: 0;
+    }
+}
+
+/* Individual head pop off animation */
+.head-explode {
+    animation: headFlyOff 1.2s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes headFlyOff {
+    0% { transform: translate(0, 0) scale(1); opacity: 1; }
+    50% { transform: translate(var(--fly-x, 40px), -60px) rotate(180deg) scale(0.8); opacity: 0.8; }
+    100% { transform: translate(var(--fly-x, 80px), 120px) rotate(360deg) scale(0.1); opacity: 0; }
+}
+
+/* ===================================================
+   Victory Modal / Celebration Overlay
+=================================================== */
+.victory-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.victory-modal.active {
+    display: flex;
+    animation: modalPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.modal-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 7, 13, 0.88);
+    backdrop-filter: blur(8px);
+}
+
+.modal-content {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(145deg, #1A1F33, #0F1322);
+    border: 2px solid var(--primary-gold);
+    border-radius: 24px;
+    padding: 32px 28px;
+    max-width: 520px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(255, 215, 0, 0.4), inset 0 0 40px rgba(255, 107, 26, 0.15);
+}
+
+.modal-close {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    background: none;
+    border: none;
+    color: #FFF;
+    font-size: 1.8rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: 0.2s;
+}
+
+.modal-close:hover {
+    opacity: 1;
+    color: var(--primary-gold);
+}
+
+.diya-decor {
+    font-size: 1.8rem;
+    letter-spacing: 12px;
+    margin-bottom: 8px;
+}
+
+.victory-title {
+    font-family: 'Rozha One', serif;
+    font-size: clamp(1.6rem, 4.5vw, 2.2rem);
+    color: var(--primary-gold);
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+    margin-bottom: 4px;
+}
+
+.flaming-text {
+    font-family: 'Yatra One', cursive;
+    color: #FF7675;
+    font-size: 1.1rem;
+    margin-bottom: 18px;
+}
+
+.personal-wishing-box {
+    background: rgba(255, 215, 0, 0.08);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 22px;
+}
+
+.personal-wishing-box p {
+    color: #FFEAA7;
+    font-size: 0.95rem;
+}
+
+.highlight-festival {
+    font-family: 'Rozha One', serif;
+    font-size: clamp(1.3rem, 3.8vw, 1.8rem);
+    color: var(--primary-gold);
+    margin: 8px 0;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.wishing-blessing {
+    font-size: 0.88rem !important;
+    color: #CBD5E0 !important;
+    line-height: 1.5;
+    margin-top: 8px;
+}
+
+.modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.action-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    color: #FFF;
+    border-radius: 30px;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #FFF;
+}
+
+.pulse {
+    animation: buttonPulse 1.8s infinite;
+}
+
+@keyframes buttonPulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+    70% { transform: scale(1.02); box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* ===================================================
+   Responsive Mobile Adjustments
+=================================================== */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px 10px 40px;
+    }
+
+    .battle-arena {
+        height: 380px;
+        padding: 0 10px 15px;
+    }
+
+    .rama-box {
+        width: 170px;
+        height: 290px;
+    }
+
+    .ravan-box {
+        width: 210px;
+        height: 320px;
+    }
+
+    .vs-badge {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+
+    .ravan-speech {
+        font-size: 0.7rem;
+        padding: 4px 8px;
+        top: -24px;
+        right: 5px;
+    }
+
+    .mashal {
+        display: none; /* Hide torches on small mobile to maximize battle view */
+    }
+
+    .shoot-btn {
+        padding: 14px 24px;
+        gap: 12px;
+    }
+
+    .shoot-btn .btn-icon {
+        font-size: 1.8rem;
+    }
+
+    .input-group {
+        flex-direction: column;
+    }
+
+    .primary-btn {
+        padding: 12px;
+        justify-content: center;
+    }
+
+    .share-actions {
+        flex-direction: column;
+    }
+
+    .whatsapp-btn, .copy-btn, .replay-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .sound-btn {
+        top: 12px;
+        left: 12px;
+        padding: 6px 12px;
+        font-size: 0.75rem;
+    }
+
+    .divine-moon {
+        width: 60px;
+        height: 60px;
+        top: 20px;
+        right: 15px;
+    }
+}
+
+@media (max-width: 420px) {
+    .battle-arena {
+        height: 320px;
+    }
+
+    .rama-box {
+        width: 140px;
+        height: 240px;
+    }
+
+    .ravan-box {
+        width: 175px;
+        height: 260px;
+    }
+
+    .name-tag {
+        font-size: 0.68rem;
+        padding: 2px 8px;
+    }
+}
+

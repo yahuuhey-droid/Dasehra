@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>शुभ दशहरा | Happy Dussehra - रावण दहन उत्सव</title>
+    <meta name="description" content="अधर्म पर धर्म की विजय! बुराई के प्रतीक रावण का वध करें और अपने प्रियजनों को खास अंदाज़ में दशहरा की शुभकामनाएं भेजें।">
+    
+    <!-- Open Graph for WhatsApp / Social Media Share -->
+    <meta property="og:title" content="🏹 शुभ दशहरा! रावण दहन देखें और शुभकामनाएं पाएं">
+    <meta property="og:description" content="बुराई पर अच्छाई की जीत का पावन पर्व। रावण पर तीर चलाएं और विजयदशमी का आनंद लें!">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Yatra+One&family=Poppins:wght@300;400;600;700;800&family=Cinzel:wght@600;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Night Sky Canvas for Stars, Fireworks, Embers, Arrow -->
+    <canvas id="fxCanvas"></canvas>
+
+    <!-- Background Ambience -->
+    <div class="stars-layer"></div>
+    <div class="clouds-layer"></div>
+    <div class="divine-moon"></div>
+    
+    <!-- Subtle Sky Background Watermark -->
+    <div class="sky-watermark" aria-hidden="true">CHETAN SAHU</div>
+
+    <!-- Audio Control Button -->
+    <button id="soundToggle" class="sound-btn" title="ध्वनि चालू/बंद करें (Sound On/Off)">
+        <i class="fa-solid fa-volume-high"></i>
+        <span>ध्वनि चालू</span>
+    </button>
+
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- Header Banner with Festive Title -->
+        <header class="festive-header">
+            <div class="om-symbol">卐 ॐ 卐</div>
+            <h1 class="main-title">
+                <span class="hindi-title">शुभ विजयदशमी</span>
+                <span class="sub-title">असत्य पर सत्य एवं अधर्म पर धर्म की विजय का महापर्व</span>
+            </h1>
+        </header>
+
+        <!-- Battle Arena (Shri Ram vs Ravan) -->
+        <div class="battle-arena" id="battleArena">
+            
+            <!-- Ground & Festive Torches (Mashal) -->
+            <div class="ground"></div>
+            <div class="mashal mashal-left">
+                <div class="mashal-flame"></div>
+                <div class="mashal-stick"></div>
+            </div>
+            <div class="mashal mashal-right">
+                <div class="mashal-flame"></div>
+                <div class="mashal-stick"></div>
+            </div>
+
+            <!-- Sky Victory Backdrop Banner (Appears after Ravan Dahan) -->
+            <div class="sky-victory-banner" id="skyVictoryBanner">
+                <div class="divine-sunburst"></div>
+                <div class="sky-tagline">॥ अधर्म पर धर्म की विजय ॥</div>
+                <h2 class="sky-main-title">सत्य की जीत, असत्य की हार!</h2>
+                <p class="sky-sub-slogan">अहंकार का हुआ नाश • जय श्री राम 🚩</p>
+                <div class="sky-diyas">🪔 🪔 🪔</div>
+            </div>
+
+            <!-- Lord Rama Section -->
+            <div class="character-box rama-box" id="ramaBox">
+                <div class="divine-aura"></div>
+                
+                <!-- Bhagwan Ram SVG Illustration -->
+                <div class="rama-svg-wrapper">
+                    <svg viewBox="0 0 320 460" class="rama-svg" id="ramaSvg">
+                        <defs>
+                            <!-- Divine Bow Gradient -->
+                            <linearGradient id="bowGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FFF9A6"/>
+                                <stop offset="30%" stop-color="#FFD700"/>
+                                <stop offset="70%" stop-color="#D35400"/>
+                                <stop offset="100%" stop-color="#FFCC00"/>
+                            </linearGradient>
+
+                            <!-- Divine Halo Gradient -->
+                            <radialGradient id="divineGlow" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#FFFDF0" stop-opacity="1"/>
+                                <stop offset="35%" stop-color="#FFEAA7" stop-opacity="0.85"/>
+                                <stop offset="70%" stop-color="#FFA502" stop-opacity="0.45"/>
+                                <stop offset="100%" stop-color="#FF4757" stop-opacity="0"/>
+                            </radialGradient>
+
+                            <!-- Saffron Silk Dhoti & Angavastra -->
+                            <linearGradient id="saffronGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FFA502"/>
+                                <stop offset="40%" stop-color="#FF793F"/>
+                                <stop offset="85%" stop-color="#D35400"/>
+                                <stop offset="100%" stop-color="#962D00"/>
+                            </linearGradient>
+
+                            <!-- Flowing Dupatta Gradient -->
+                            <linearGradient id="angavastraGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FFD32A"/>
+                                <stop offset="60%" stop-color="#FF5722"/>
+                                <stop offset="100%" stop-color="#B71C1C"/>
+                            </linearGradient>
+
+                            <!-- Skin Tone: Divine Shyam Varna (Celestial Blue with radiant undertones) -->
+                            <linearGradient id="ramSkin" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#82B1FF"/>
+                                <stop offset="40%" stop-color="#3B82F6"/>
+                                <stop offset="85%" stop-color="#1D4ED8"/>
+                                <stop offset="100%" stop-color="#1E3A8A"/>
+                            </linearGradient>
+
+                            <!-- Royal Golden Armor Gradient -->
+                            <linearGradient id="goldArmor" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FFF9C4"/>
+                                <stop offset="45%" stop-color="#FBC02D"/>
+                                <stop offset="80%" stop-color="#F57F17"/>
+                                <stop offset="100%" stop-color="#B26A00"/>
+                            </linearGradient>
+
+                            <!-- Fire Glow Filter -->
+                            <filter id="fireGlow" x="-50%" y="-50%" width="200%" height="200%">
+                                <feGaussianBlur stdDeviation="6" result="blur"/>
+                                <feMerge>
+                                    <feMergeNode in="blur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <!-- Divine Radiating Prabhavali (Halo with sacred Sun Rays) -->
+                        <g class="halo-rays" transform="translate(150, 85)">
+                            <circle cx="0" cy="0" r="58" fill="url(#divineGlow)"/>
+                            <!-- 12 Radiating Sun Beams -->
+                            <g stroke="#FFEAA7" stroke-width="2.5" opacity="0.85">
+                                <line x1="0" y1="-62" x2="0" y2="-48"/>
+                                <line x1="44" y1="-44" x2="34" y2="-34"/>
+                                <line x1="62" y1="0" x2="48" y2="0"/>
+                                <line x1="44" y1="44" x2="34" y2="34"/>
+                                <line x1="0" y1="62" x2="0" y2="48"/>
+                                <line x1="-44" y1="44" x2="-34" y2="34"/>
+                                <line x1="-62" y1="0" x2="-48" y2="0"/>
+                                <line x1="-44" y1="-44" x2="-34" y2="-34"/>
+                            </g>
+                            <circle cx="0" cy="0" r="46" fill="none" stroke="#FFDF00" stroke-width="2.5" stroke-dasharray="6 3"/>
+                        </g>
+
+                        <!-- Royal Quiver with Divine Arrows on Shri Ram's Back -->
+                        <g transform="rotate(-20 120 130)">
+                            <rect x="98" y="70" width="26" height="130" rx="8" fill="#5D4037" stroke="#FFD700" stroke-width="2"/>
+                            <!-- Gold ornamental bands on quiver -->
+                            <rect x="98" y="90" width="26" height="6" fill="#FBC02D"/>
+                            <rect x="98" y="145" width="26" height="6" fill="#FBC02D"/>
+                            <!-- Arrow Fletchings (Pankh) -->
+                            <polygon points="102,70 106,42 110,70" fill="#E67E22" stroke="#FFD700" stroke-width="0.8"/>
+                            <polygon points="111,70 115,38 119,70" fill="#F1C40F" stroke="#FFD700" stroke-width="0.8"/>
+                            <polygon points="120,70 124,44 128,70" fill="#E74C3C" stroke="#FFD700" stroke-width="0.8"/>
+                        </g>
+
+                        <!-- Flowing Royal Angavastra (Drapery waving heroically in the celestial wind) -->
+                        <path d="M125 150 C70 180 50 250 40 320 C65 310 90 270 120 220 Z" fill="url(#angavastraGrad)" opacity="0.95"/>
+                        <path d="M40 320 C35 345 55 355 75 330 C95 300 115 250 125 210 Z" fill="#D35400" opacity="0.85"/>
+                        <!-- Gold Border on Drape -->
+                        <path d="M125 150 C70 180 50 250 40 320" stroke="#FFD700" stroke-width="3" fill="none"/>
+
+                        <!-- Warrior Stance: Legs & Dhoti (Padmasana / Virasana archer stance) -->
+                        <g id="ramLegs">
+                            <!-- Dhoti Pleats -->
+                            <path d="M120 240 L88 385 L118 395 L145 285 L175 390 L205 382 L168 240 Z" fill="url(#saffronGrad)"/>
+                            <!-- Silken Folds -->
+                            <path d="M132 245 Q115 315 110 385" stroke="#7A2200" stroke-width="2.5" fill="none"/>
+                            <path d="M145 250 Q148 325 152 385" stroke="#7A2200" stroke-width="2.5" fill="none"/>
+                            <path d="M158 245 Q178 315 186 380" stroke="#7A2200" stroke-width="2.5" fill="none"/>
+                            <!-- Golden Border at Bottom of Dhoti -->
+                            <path d="M88 385 L118 395" stroke="#FFD700" stroke-width="5"/>
+                            <path d="M175 390 L205 382" stroke="#FFD700" stroke-width="5"/>
+
+                            <!-- Golden Waistband (Kamarbandh) & Gemmed Pendant -->
+                            <path d="M115 235 Q145 252 172 235 L172 248 Q145 265 115 248 Z" fill="url(#goldArmor)" stroke="#B7791F" stroke-width="1.5"/>
+                            <circle cx="144" cy="254" r="5" fill="#E74C3C" stroke="#FFF" stroke-width="1"/>
+
+                            <!-- Feet & Padukas (Golden Royal Sandals) -->
+                            <ellipse cx="102" cy="392" rx="18" ry="7" fill="url(#ramSkin)"/>
+                            <ellipse cx="102" cy="394" rx="19" ry="4" fill="#5D4037"/>
+                            <circle cx="108" cy="391" r="3" fill="#FFD700"/>
+
+                            <ellipse cx="192" cy="388" rx="18" ry="7" fill="url(#ramSkin)"/>
+                            <ellipse cx="192" cy="390" rx="19" ry="4" fill="#5D4037"/>
+                            <circle cx="198" cy="387" r="3" fill="#FFD700"/>
+                        </g>
+
+                        <!-- Muscular Torso & Golden Armor (Kavach) -->
+                        <g id="ramTorso">
+                            <path d="M118 135 C115 180 116 210 120 240 C138 246 156 246 168 240 C172 210 174 180 170 135 Z" fill="url(#ramSkin)"/>
+                            
+                            <!-- Royal Golden Chestplate (Vakshasthala Kavach) -->
+                            <path d="M125 142 Q144 175 163 142 L166 185 Q144 205 122 185 Z" fill="url(#goldArmor)" stroke="#D4AF37" stroke-width="2" opacity="0.95"/>
+                            <!-- Ruby Medallion in Center -->
+                            <circle cx="144" cy="168" r="6" fill="#C0392B" stroke="#FFD700" stroke-width="2"/>
+                            
+                            <!-- Sacred Yajnopavita (Janeu thread) -->
+                            <path d="M130 138 Q144 190 162 238" stroke="#FFFFFF" stroke-width="2.5" fill="none"/>
+                            <path d="M127 142 Q142 195 160 236" stroke="#FFD700" stroke-width="1.2" fill="none"/>
+
+                            <!-- Golden Pearl Necklace (Navaratna Haar) -->
+                            <path d="M131 136 Q144 158 158 136" stroke="#FFD700" stroke-width="4.5" fill="none"/>
+                            <circle cx="144" cy="154" r="3.5" fill="#00D2D3"/>
+                        </g>
+
+                        <!-- Neck & Face -->
+                        <g id="ramFace">
+                            <rect x="137" y="116" width="16" height="22" fill="url(#ramSkin)" rx="5"/>
+                            <!-- Graceful Divine Face -->
+                            <path d="M132 94 C132 120 144 125 147 125 C154 125 164 120 164 94 C164 78 152 75 147 75 C140 75 132 78 132 94 Z" fill="url(#ramSkin)"/>
+                            
+                            <!-- Flowing Divine Hair (Jata Locks) -->
+                            <path d="M132 90 Q124 118 126 142 Q132 125 134 100 Z" fill="#111827"/>
+                            <path d="M162 90 Q170 118 168 142 Q164 125 161 100 Z" fill="#111827"/>
+                            <!-- Hair Bun on top under crown -->
+                            <ellipse cx="147" cy="74" rx="14" ry="10" fill="#111827"/>
+
+                            <!-- Holy Tilak (Vaishnava Urdhva Pundra) -->
+                            <path d="M147 77 L147 96" stroke="#FF3838" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M142 80 Q147 92 152 80" stroke="#FFFFFF" stroke-width="2.5" fill="none"/>
+                            <circle cx="147" cy="97" r="1.8" fill="#FFDF00"/>
+
+                            <!-- Lotus Eyes (Kamalnayan) - calm, focused & divine -->
+                            <path d="M139 94 Q144 91 149 94 Q144 97 139 94 Z" fill="#FFFFFF"/>
+                            <circle cx="145" cy="94" r="2.2" fill="#0A192F"/>
+                            <circle cx="146" cy="93.5" r="0.8" fill="#FFFFFF"/>
+                            <!-- Eyebrows -->
+                            <path d="M138 90 Q144 87 149 91" stroke="#0F172A" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+
+                            <!-- Noble Nose & Serene Smile -->
+                            <path d="M147 94 L146 102 L148 103" stroke="#1D4ED8" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                            <path d="M143 108 Q147 112 152 108" stroke="#B91C1C" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+                            <!-- Golden Ear Pendants (Makara Kundala) -->
+                            <path d="M130 96 Q126 108 132 110 Q135 102 131 96 Z" fill="url(#goldArmor)" stroke="#B7791F" stroke-width="1"/>
+                            <circle cx="130" cy="111" r="2.5" fill="#FF3838"/>
+                            <path d="M164 96 Q168 108 162 110 Q159 102 163 96 Z" fill="url(#goldArmor)" stroke="#B7791F" stroke-width="1"/>
+                            <circle cx="164" cy="111" r="2.5" fill="#FF3838"/>
+
+                            <!-- Supreme Golden Crown (Kirit Mukut) with Peacock Feather -->
+                            <path d="M130 78 L147 36 L164 78 Q147 73 130 78 Z" fill="url(#goldArmor)" stroke="#B7791F" stroke-width="2"/>
+                            <!-- Ruby & Emerald Ornaments in Crown -->
+                            <polygon points="147,38 141,60 153,60" fill="#E74C3C"/>
+                            <circle cx="147" cy="56" r="4" fill="#FFDF00" stroke="#FFF" stroke-width="1"/>
+                            <circle cx="137" cy="74" r="3" fill="#00D2D3"/>
+                            <circle cx="147" cy="72" r="3.5" fill="#FF3838"/>
+                            <circle cx="157" cy="74" r="3" fill="#00D2D3"/>
+
+                            <!-- Divine Peacock Feather Crest (Mor Pankh) atop the Crown -->
+                            <ellipse cx="147" cy="28" rx="8" ry="12" fill="#009432" stroke="#FFDF00" stroke-width="1.5"/>
+                            <ellipse cx="147" cy="28" rx="5" ry="8" fill="#0652DD"/>
+                            <circle cx="147" cy="28" r="2.5" fill="#FFA502"/>
+                        </g>
+
+                        <!-- ==============================================
+                             COMBAT POSE (Aiming & Shooting Brahmastra)
+                             ============================================== -->
+                        <g id="ramaCombatPose">
+                            <!-- Left Arm (Holding the Bow, stretched forward proudly) -->
+                            <g id="holdingArm">
+                                <path d="M162 142 L236 160 L246 172" stroke="url(#ramSkin)" stroke-width="15" stroke-linecap="round" fill="none"/>
+                                <!-- Golden Armlet (Keyura) & Wrist Bangle (Kankan) -->
+                                <rect x="185" y="146" width="14" height="17" fill="url(#goldArmor)" rx="3" transform="rotate(16 185 146)"/>
+                                <circle cx="242" cy="168" r="7.5" fill="url(#goldArmor)"/>
+                            </g>
+
+                            <!-- Right Arm (Drawing the bowstring back to ear) -->
+                            <g id="drawingArmGroup">
+                                <path d="M125 142 L92 165 L145 168" stroke="url(#ramSkin)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none" id="drawingArm"/>
+                                <rect x="98" y="152" width="13" height="15" fill="url(#goldArmor)" rx="3" transform="rotate(-30 98 152)"/>
+                                <circle cx="144" cy="168" r="7.5" fill="url(#goldArmor)"/>
+                            </g>
+
+                            <!-- Divine Bow (Kodanda / Sharanga) -->
+                            <g id="divineBow">
+                                <!-- Bow Stave (Double-recurve heroic curve) -->
+                                <path d="M220 30 Q275 165 225 325" fill="none" stroke="url(#bowGold)" stroke-width="14" stroke-linecap="round" filter="url(#fireGlow)"/>
+                                <path d="M220 30 Q275 165 225 325" fill="none" stroke="#FFF9A6" stroke-width="3.5" stroke-linecap="round"/>
+                                <!-- Bow Carved Ends (Golden Makara Heads) -->
+                                <circle cx="220" cy="30" r="8" fill="#FFD700" stroke="#8E44AD" stroke-width="2.5"/>
+                                <circle cx="225" cy="325" r="8" fill="#FFD700" stroke="#8E44AD" stroke-width="2.5"/>
+                                <!-- Center Grip with Velvet Wrap -->
+                                <rect x="250" y="154" width="12" height="26" rx="4" fill="#8B4513" stroke="#FFD700" stroke-width="2"/>
+                                
+                                <!-- Dynamic Bowstring (Drawn to Rama's right hand) -->
+                                <path d="M220 30 L146 168 L225 325" id="bowString" stroke="#FFFFFF" stroke-width="3" fill="none" filter="url(#fireGlow)"/>
+                            </g>
+
+                            <!-- The Blazing Brahmastra Arrow (Loaded on Bow) -->
+                            <g id="loadedArrow" transform="translate(0, 0)">
+                                <!-- Golden Shaft -->
+                                <line x1="145" y1="168" x2="268" y2="168" stroke="#FFEAA7" stroke-width="5"/>
+                                <line x1="145" y1="168" x2="265" y2="168" stroke="#FF9F43" stroke-width="2.5"/>
+                                <!-- Rear Feathers (Agni Wings) -->
+                                <polygon points="146,168 132,158 148,168 132,178" fill="#EE5253"/>
+                                <!-- Arrow Head (Divine Flaming Crescent / Spear) -->
+                                <polygon points="268,168 252,157 260,168 252,179" fill="#FFD700" stroke="#FF4757" stroke-width="1.5"/>
+                                <polygon points="272,168 258,161 282,168 258,175" fill="#FFF275" filter="url(#fireGlow)"/>
+                                <!-- Pulsing Flame Aura on Arrow Tip -->
+                                <circle cx="276" cy="168" r="10" fill="url(#divineGlow)" class="pulsing-tip"/>
+                            </g>
+                        </g>
+
+                        <!-- ==============================================
+                             NORMAL / PEACEFUL POSE (Resting Bow & Abhaya Mudra)
+                             Activated after Ravan Vadh
+                             ============================================== -->
+                        <g id="ramaPeacefulPose" style="display: none; opacity: 0;">
+                            <!-- Left Arm Holding Kodanda Bow Rested at Hip -->
+                            <g id="restingLeftArm">
+                                <path d="M165 142 L192 195 L196 222" stroke="url(#ramSkin)" stroke-width="14" stroke-linecap="round" fill="none"/>
+                                <rect x="182" y="178" width="13" height="15" fill="url(#goldArmor)" rx="3" transform="rotate(18 182 178)"/>
+                                <circle cx="196" cy="218" r="7" fill="url(#goldArmor)"/>
+                                <circle cx="200" cy="223" r="6" fill="url(#ramSkin)"/>
+                            </g>
+
+                            <!-- Upright Rested Kodanda Bow beside Him -->
+                            <g id="restingBow">
+                                <path d="M196 65 Q226 220 196 375" fill="none" stroke="url(#bowGold)" stroke-width="13" stroke-linecap="round" filter="url(#fireGlow)"/>
+                                <path d="M196 65 Q226 220 196 375" fill="none" stroke="#FFF9A6" stroke-width="3" stroke-linecap="round"/>
+                                <circle cx="196" cy="65" r="7.5" fill="#FFD700" stroke="#8E44AD" stroke-width="2"/>
+                                <circle cx="196" cy="375" r="7.5" fill="#FFD700" stroke="#8E44AD" stroke-width="2"/>
+                                <rect x="204" y="208" width="12" height="26" rx="3" fill="#8B4513" stroke="#FFD700" stroke-width="1.5"/>
+                                <line x1="196" y1="65" x2="196" y2="375" stroke="#FFFFFF" stroke-width="2.5" opacity="0.9" filter="url(#fireGlow)"/>
+                            </g>
+
+                            <!-- Right Arm in Abhaya Mudra (आशीर्वाद व अभय मुद्रा) -->
+                            <g id="blessingRightArm">
+                                <path d="M122 142 L98 185 L110 148" stroke="url(#ramSkin)" stroke-width="13.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                <rect x="94" y="174" width="12" height="14" fill="url(#goldArmor)" rx="3" transform="rotate(-15 94 174)"/>
+                                <circle cx="110" cy="148" r="7" fill="url(#goldArmor)"/>
+                                
+                                <!-- Abhaya Mudra Palm -->
+                                <path d="M103 146 C101 134 117 134 115 146 Z" fill="url(#ramSkin)"/>
+                                <line x1="105" y1="138" x2="105" y2="120" stroke="url(#ramSkin)" stroke-width="3.5" stroke-linecap="round"/>
+                                <line x1="109" y1="136" x2="109" y2="116" stroke="url(#ramSkin)" stroke-width="3.5" stroke-linecap="round"/>
+                                <line x1="113" y1="137" x2="113" y2="118" stroke="url(#ramSkin)" stroke-width="3.5" stroke-linecap="round"/>
+                                <line x1="117" y1="140" x2="117" y2="123" stroke="url(#ramSkin)" stroke-width="3" stroke-linecap="round"/>
+                                <path d="M104 144 Q100 138 102 134" stroke="url(#ramSkin)" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+                                
+                                <!-- Auspicious Lotus / Chakra in Palm -->
+                                <circle cx="110" cy="138" r="3.2" fill="#FFDF00" stroke="#FF4757" stroke-width="0.8"/>
+                                <circle cx="110" cy="128" r="22" fill="url(#divineGlow)" class="blessing-glow"/>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div class="name-tag ram-tag" id="ramNameTag">मर्यादा पुरुषोत्तम श्री राम</div>
+            </div>
+
+            <!-- VS Center Badge -->
+            <div class="vs-badge" id="vsBadge">
+                <span>VS</span>
+            </div>
+
+            <!-- Ravana Section -->
+            <div class="character-box ravan-box" id="ravanBox">
+                <div class="ravan-dark-aura" id="ravanAura"></div>
+                
+                <!-- Ravana Speech / Roar Bubble -->
+                <div class="ravan-speech" id="ravanSpeech">
+                    <span id="ravanSpeechText">"हा हा हा! मुझे कोई परास्त नहीं कर सकता!"</span>
+                </div>
+
+                <!-- 10-Headed Ravan Effigy SVG Illustration -->
+                <div class="ravan-svg-wrapper" id="ravanSvgWrapper">
+                    <svg viewBox="0 0 460 510" class="ravan-svg" id="ravanSvg">
+                        <defs>
+                            <!-- Ravan Demon Skin Tone (Deep Asura Slate Blue / Shadow) -->
+                            <linearGradient id="ravanSkin" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#34495E"/>
+                                <stop offset="50%" stop-color="#1E272E"/>
+                                <stop offset="100%" stop-color="#0F1418"/>
+                            </linearGradient>
+
+                            <!-- Royal Lanka Demon Armor Gradient -->
+                            <linearGradient id="demonGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FFF275"/>
+                                <stop offset="40%" stop-color="#E58E26"/>
+                                <stop offset="80%" stop-color="#B71540"/>
+                                <stop offset="100%" stop-color="#6F1E51"/>
+                            </linearGradient>
+
+                            <!-- Chandrahas Khadga (Divine Demon Sword) -->
+                            <linearGradient id="swordBlade" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FFFFFF"/>
+                                <stop offset="30%" stop-color="#DFF9FB"/>
+                                <stop offset="70%" stop-color="#7ED6DF"/>
+                                <stop offset="100%" stop-color="#22A6B3"/>
+                            </linearGradient>
+
+                            <!-- Amrit Kund (Nectar in Navel) Glow -->
+                            <radialGradient id="amritGlow" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="1"/>
+                                <stop offset="30%" stop-color="#FFDF00" stop-opacity="0.9"/>
+                                <stop offset="70%" stop-color="#FF3838" stop-opacity="0.6"/>
+                                <stop offset="100%" stop-color="#FF3838" stop-opacity="0"/>
+                            </radialGradient>
+
+                            <!-- Fire burn gradient for effigy destruction -->
+                            <radialGradient id="fireBurnGrad" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#FFF200"/>
+                                <stop offset="30%" stop-color="#FF3838"/>
+                                <stop offset="70%" stop-color="#B33939"/>
+                                <stop offset="100%" stop-color="#1E272E" stop-opacity="0.2"/>
+                            </radialGradient>
+                        </defs>
+
+                        <!-- Navel (Nabhi) Target Amrit Kund Indicator (Where Rama shoots) -->
+                        <g id="ravanNavelTarget" class="navel-target" transform="translate(230, 315)">
+                            <circle cx="0" cy="0" r="22" fill="url(#amritGlow)" class="navel-pulse-ring"/>
+                            <circle cx="0" cy="0" r="14" fill="none" stroke="#FFD700" stroke-width="2.5" stroke-dasharray="4 2"/>
+                            <circle cx="0" cy="0" r="9" fill="#FFDF00" stroke="#FF3838" stroke-width="2"/>
+                            <circle cx="0" cy="0" r="4" fill="#FFFFFF"/>
+                        </g>
+
+                        <!-- Golden Royal Neck Collar (Connecting all heads solidly to armor) -->
+                        <path d="M42 122 Q230 138 418 122 L418 134 Q230 150 42 134 Z" fill="url(#demonGold)" stroke="#FFD700" stroke-width="2"/>
+
+                        <!-- 10+ HEADS ROW OF RAVANA (5 on Left, Center King Head, 5 on Right) -->
+                        <g id="ravanHeadsGroup" class="all-heads">
+                            <!-- Left 5 Heads (Aligned horizontally at Y=82) -->
+                            <!-- Head 1 (Far Left) -->
+                            <g class="sub-head head-1" transform="translate(50, 82) scale(0.78)">
+                                <path d="M10 18 L25 -14 L40 18 Z" fill="url(#demonGold)" stroke="#B33939" stroke-width="1.5"/>
+                                <circle cx="25" cy="-2" r="3" fill="#E74C3C"/>
+                                <ellipse cx="25" cy="30" rx="22" ry="26" fill="url(#ravanSkin)" stroke="#FF3838" stroke-width="1.8"/>
+                                <circle cx="16" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <circle cx="34" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <path d="M8 38 Q25 46 42 38 Q34 46 25 43 Q16 46 8 38 Z" fill="#000"/>
+                                <path d="M15 44 Q25 49 35 44" stroke="#FFF" stroke-width="2" fill="none"/>
+                                <circle cx="3" cy="32" r="4.5" fill="url(#demonGold)"/>
+                                <circle cx="47" cy="32" r="4.5" fill="url(#demonGold)"/>
+                            </g>
+
+                            <!-- Head 2 -->
+                            <g class="sub-head head-2" transform="translate(86, 82) scale(0.78)">
+                                <path d="M10 18 L25 -14 L40 18 Z" fill="url(#demonGold)" stroke="#B33939" stroke-width="1.5"/>
+                                <circle cx="25" cy="-2" r="3" fill="#E74C3C"/>
+                                <ellipse cx="25" cy="30" rx="22" ry="26" fill="url(#ravanSkin)" stroke="#FF3838" stroke-width="1.8"/>
+                                <circle cx="16" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <circle cx="34" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <path d="M8 38 Q25 46 42 38 Q34 46 25 43 Q16 46 8 38 Z" fill="#000"/>
+                                <path d="M15 44 Q25 49 35 44" stroke="#FFF" stroke-width="2" fill="none"/>
+                                <circle cx="3" cy="32" r="4.5" fill="url(#demonGold)"/>
+                                <circle cx="47" cy="32" r="4.5" fill="url(#demonGold)"/>
+                            </g>
+
+                            <!-- Head 3 -->
+                            <g class="sub-head head-3" transform="translate(122, 82) scale(0.78)">
+                                <path d="M10 18 L25 -14 L40 18 Z" fill="url(#demonGold)" stroke="#B33939" stroke-width="1.5"/>
+                                <circle cx="25" cy="-2" r="3" fill="#E74C3C"/>
+                                <ellipse cx="25" cy="30" rx="22" ry="26" fill="url(#ravanSkin)" stroke="#FF3838" stroke-width="1.8"/>
+                                <circle cx="16" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <circle cx="34" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <path d="M8 38 Q25 46 42 38 Q34 46 25 43 Q16 46 8 38 Z" fill="#000"/>
+                                <path d="M15 44 Q25 49 35 44" stroke="#FFF" stroke-width="2" fill="none"/>
+                                <circle cx="3" cy="32" r="4.5" fill="url(#demonGold)"/>
+                                <circle cx="47" cy="32" r="4.5" fill="url(#demonGold)"/>
+                            </g>
+
+                            <!-- Head 4 -->
+                            <g class="sub-head head-4" transform="translate(158, 82) scale(0.78)">
+                                <path d="M10 18 L25 -14 L40 18 Z" fill="url(#demonGold)" stroke="#B33939" stroke-width="1.5"/>
+                                <circle cx="25" cy="-2" r="3" fill="#E74C3C"/>
+                                <ellipse cx="25" cy="30" rx="22" ry="26" fill="url(#ravanSkin)" stroke="#FF3838" stroke-width="1.8"/>
+                                <circle cx="16" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <circle cx="34" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <path d="M8 38 Q25 46 42 38 Q34 46 25 43 Q16 46 8 38 Z" fill="#000"/>
+                                <path d="M15 44 Q25 49 35 44" stroke="#FFF" stroke-width="2" fill="none"/>
+                                <circle cx="3" cy="32" r="4.5" fill="url(#demonGold)"/>
+                                <circle cx="47" cy="32" r="4.5" fill="url(#demonGold)"/>
+                            </g>
+
+                            <!-- Head 5 (Added Left Head) -->
+                            <g class="sub-head head-5" transform="translate(194, 82) scale(0.78)">
+                                <path d="M10 18 L25 -14 L40 18 Z" fill="url(#demonGold)" stroke="#B33939" stroke-width="1.5"/>
+                                <circle cx="25" cy="-2" r="3" fill="#E74C3C"/>
+                                <ellipse cx="25" cy="30" rx="22" ry="26" fill="url(#ravanSkin)" stroke="#FF3838" stroke-width="1.8"/>
+                                <circle cx="16" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <circle cx="34" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <path d="M8 38 Q25 46 42 38 Q34 46 25 43 Q16 46 8 38 Z" fill="#000"/>
+                                <path d="M15 44 Q25 49 35 44" stroke="#FFF" stroke-width="2" fill="none"/>
+                                <circle cx="3" cy="32" r="4.5" fill="url(#demonGold)"/>
+                                <circle cx="47" cy="32" r="4.5" fill="url(#demonGold)"/>
+                            </g>
+
+                            <!-- MAIN CENTER HEAD (King of Lanka - Supreme Head) -->
+                            <g class="main-head head-center" transform="translate(230, 80)">
+                                <!-- Evil Giant 3-Tiered Crown (Swarna Mukut) -->
+                                <path d="M-44 -12 L0 -82 L44 -12 Q0 -22 -44 -12 Z" fill="url(#demonGold)" stroke="#990000" stroke-width="3"/>
+                                <polygon points="0,-82 -14,-42 14,-42" fill="#C0392B"/>
+                                <circle cx="0" cy="-42" r="8" fill="#E74C3C" stroke="#FFF" stroke-width="2"/>
+                                <circle cx="-28" cy="-18" r="5" fill="#E58E26"/>
+                                <circle cx="28" cy="-18" r="5" fill="#E58E26"/>
+
+                                <!-- Imposing Royal Face -->
+                                <ellipse cx="0" cy="16" rx="38" ry="44" fill="url(#ravanSkin)" stroke="#FF3838" stroke-width="2.5"/>
+
+                                <!-- Royal Demon Tilak (Tripundra with Blood Red Bindi) -->
+                                <path d="-18 -6 Q0 -28 18 -6 L10 2 L-10 2 Z" fill="#E74C3C"/>
+                                <circle cx="0" cy="0" r="4" fill="#FFD700" stroke="#FFF" stroke-width="1"/>
+
+                                <!-- Fierce Glowing Red Demon Eyes -->
+                                <ellipse cx="-16" cy="11" rx="9" ry="7" fill="#000000"/>
+                                <ellipse cx="16" cy="11" rx="9" ry="7" fill="#000000"/>
+                                <circle cx="-16" cy="11" r="5" fill="#FF3838" class="evil-eye-pulse"/>
+                                <circle cx="16" cy="11" r="5" fill="#FF3838" class="evil-eye-pulse"/>
+                                <circle cx="-17" cy="10" r="1.8" fill="#FFFFFF"/>
+                                <circle cx="15" cy="10" r="1.8" fill="#FFFFFF"/>
+
+                                <!-- Sharp Evil Demon Brows -->
+                                <path d="M-28 2 L-8 9" stroke="#000000" stroke-width="4.5" stroke-linecap="round"/>
+                                <path d="M28 2 L8 9" stroke="#000000" stroke-width="4.5" stroke-linecap="round"/>
+
+                                <!-- Giant Royal Curled Mustache (Ravan Muchh) -->
+                                <path d="M-36 30 Q0 46 36 30 Q26 48 0 38 Q-26 48 -36 30 Z" fill="#000000"/>
+
+                                <!-- Terrifying Laughing Fangs & Teeth -->
+                                <path d="M-20 38 Q0 52 20 38" fill="#3B0505" stroke="#990000" stroke-width="2"/>
+                                <!-- Sharp demon fangs -->
+                                <polygon points="-14,38 -11,46 -8,38" fill="#FFFFFF"/>
+                                <polygon points="8,38 11,46 14,38" fill="#FFFFFF"/>
+
+                                <!-- Giant Golden Demon Kundals (Earrings) -->
+                                <circle cx="-42" cy="24" r="8.5" fill="url(#demonGold)" stroke="#990000" stroke-width="2"/>
+                                <circle cx="42" cy="24" r="8.5" fill="url(#demonGold)" stroke="#990000" stroke-width="2"/>
+                            </g>
+
+                            <!-- Right 5 Heads (Aligned horizontally at Y=82) -->
+                            <!-- Head 6 (Added Right Head) -->
+                            <g class="sub-head head-6" transform="translate(266, 82) scale(0.78)">
+                                <path d="M10 18 L25 -14 L40 18 Z" fill="url(#demonGold)" stroke="#B33939" stroke-width="1.5"/>
+                                <circle cx="25" cy="-2" r="3" fill="#E74C3C"/>
+                                <ellipse cx="25" cy="30" rx="22" ry="26" fill="url(#ravanSkin)" stroke="#FF3838" stroke-width="1.8"/>
+                                <circle cx="16" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <circle cx="34" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <path d="M8 38 Q25 46 42 38 Q34 46 25 43 Q16 46 8 38 Z" fill="#000"/>
+                                <path d="M15 44 Q25 49 35 44" stroke="#FFF" stroke-width="2" fill="none"/>
+                                <circle cx="3" cy="32" r="4.5" fill="url(#demonGold)"/>
+                                <circle cx="47" cy="32" r="4.5" fill="url(#demonGold)"/>
+                            </g>
+
+                            <!-- Head 7 -->
+                            <g class="sub-head head-7" transform="translate(302, 82) scale(0.78)">
+                                <path d="M10 18 L25 -14 L40 18 Z" fill="url(#demonGold)" stroke="#B33939" stroke-width="1.5"/>
+                                <circle cx="25" cy="-2" r="3" fill="#E74C3C"/>
+                                <ellipse cx="25" cy="30" rx="22" ry="26" fill="url(#ravanSkin)" stroke="#FF3838" stroke-width="1.8"/>
+                                <circle cx="16" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <circle cx="34" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <path d="M8 38 Q25 46 42 38 Q34 46 25 43 Q16 46 8 38 Z" fill="#000"/>
+                                <path d="M15 44 Q25 49 35 44" stroke="#FFF" stroke-width="2" fill="none"/>
+                                <circle cx="3" cy="32" r="4.5" fill="url(#demonGold)"/>
+                                <circle cx="47" cy="32" r="4.5" fill="url(#demonGold)"/>
+                            </g>
+
+                            <!-- Head 8 -->
+                            <g class="sub-head head-8" transform="translate(338, 82) scale(0.78)">
+                                <path d="M10 18 L25 -14 L40 18 Z" fill="url(#demonGold)" stroke="#B33939" stroke-width="1.5"/>
+                                <circle cx="25" cy="-2" r="3" fill="#E74C3C"/>
+                                <ellipse cx="25" cy="30" rx="22" ry="26" fill="url(#ravanSkin)" stroke="#FF3838" stroke-width="1.8"/>
+                                <circle cx="16" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <circle cx="34" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <path d="M8 38 Q25 46 42 38 Q34 46 25 43 Q16 46 8 38 Z" fill="#000"/>
+                                <path d="M15 44 Q25 49 35 44" stroke="#FFF" stroke-width="2" fill="none"/>
+                                <circle cx="3" cy="32" r="4.5" fill="url(#demonGold)"/>
+                                <circle cx="47" cy="32" r="4.5" fill="url(#demonGold)"/>
+                            </g>
+
+                            <!-- Head 9 -->
+                            <g class="sub-head head-9" transform="translate(374, 82) scale(0.78)">
+                                <path d="M10 18 L25 -14 L40 18 Z" fill="url(#demonGold)" stroke="#B33939" stroke-width="1.5"/>
+                                <circle cx="25" cy="-2" r="3" fill="#E74C3C"/>
+                                <ellipse cx="25" cy="30" rx="22" ry="26" fill="url(#ravanSkin)" stroke="#FF3838" stroke-width="1.8"/>
+                                <circle cx="16" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <circle cx="34" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <path d="M8 38 Q25 46 42 38 Q34 46 25 43 Q16 46 8 38 Z" fill="#000"/>
+                                <path d="M15 44 Q25 49 35 44" stroke="#FFF" stroke-width="2" fill="none"/>
+                                <circle cx="3" cy="32" r="4.5" fill="url(#demonGold)"/>
+                                <circle cx="47" cy="32" r="4.5" fill="url(#demonGold)"/>
+                            </g>
+
+                            <!-- Head 10 (Far Right) -->
+                            <g class="sub-head head-10" transform="translate(410, 82) scale(0.78)">
+                                <path d="M10 18 L25 -14 L40 18 Z" fill="url(#demonGold)" stroke="#B33939" stroke-width="1.5"/>
+                                <circle cx="25" cy="-2" r="3" fill="#E74C3C"/>
+                                <ellipse cx="25" cy="30" rx="22" ry="26" fill="url(#ravanSkin)" stroke="#FF3838" stroke-width="1.8"/>
+                                <circle cx="16" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <circle cx="34" cy="27" r="4.5" fill="#FF3838" class="evil-eye"/>
+                                <path d="M8 38 Q25 46 42 38 Q34 46 25 43 Q16 46 8 38 Z" fill="#000"/>
+                                <path d="M15 44 Q25 49 35 44" stroke="#FFF" stroke-width="2" fill="none"/>
+                                <circle cx="3" cy="32" r="4.5" fill="url(#demonGold)"/>
+                                <circle cx="47" cy="32" r="4.5" fill="url(#demonGold)"/>
+                            </g>
+                        </g>
+
+                        <!-- Massive Broad Demon Torso & Armor -->
+                        <g id="ravanTorso">
+                            <!-- Golden Demon Armor Chestplate (Kavach) -->
+                            <path d="M150 155 L310 155 L335 285 L230 355 L125 285 Z" fill="url(#demonGold)" stroke="#FFD700" stroke-width="3"/>
+                            
+                            <!-- Armor Ornamentations -->
+                            <path d="M165 175 Q230 215 295 175" stroke="#FFEAA7" stroke-width="3.5" fill="none"/>
+                            <path d="M175 215 Q230 255 285 215" stroke="#FFEAA7" stroke-width="3" fill="none"/>
+                            
+                            <!-- Fierce Demon Emblem / Skull on Chest -->
+                            <circle cx="230" cy="230" r="20" fill="#2C0404" stroke="#FFD700" stroke-width="2.5"/>
+                            <circle cx="223" cy="226" r="3.5" fill="#FF3838"/>
+                            <circle cx="237" cy="226" r="3.5" fill="#FF3838"/>
+                            <path d="M222 238 L238 238" stroke="#FFD700" stroke-width="2.5"/>
+
+                            <!-- Left Arm wielding Chandrahas Sword -->
+                            <path d="M150 165 L80 235 L95 285" stroke="url(#ravanSkin)" stroke-width="24" stroke-linecap="round" fill="none"/>
+                            <circle cx="95" cy="285" r="14" fill="url(#demonGold)"/>
+                            
+                            <!-- Chandrahas Khadga (Divine Curved Demon Sword) -->
+                            <g transform="rotate(-12 95 285)">
+                                <!-- Golden Hilt / Handle -->
+                                <rect x="88" y="275" width="14" height="25" rx="3" fill="#D35400" stroke="#FFD700" stroke-width="2"/>
+                                <circle cx="95" cy="272" r="8" fill="#FFD700"/>
+                                <rect x="80" y="300" width="30" height="8" rx="2" fill="#FFD700"/>
+                                <!-- Razor-sharp Curved Blade -->
+                                <path d="M90 308 L65 440 Q85 435 95 440 L100 308 Z" fill="url(#swordBlade)" stroke="#2C3A47" stroke-width="2"/>
+                                <line x1="95" y1="310" x2="80" y2="435" stroke="#FFFFFF" stroke-width="2.5"/>
+                            </g>
+
+                            <!-- Right Arm with Spiked Shield -->
+                            <path d="M310 165 L375 235 L360 285" stroke="url(#ravanSkin)" stroke-width="24" stroke-linecap="round" fill="none"/>
+                            <!-- Massive Golden Spiked Shield (Dhal) -->
+                            <g transform="translate(370, 280)">
+                                <circle cx="0" cy="0" r="42" fill="url(#demonGold)" stroke="#990000" stroke-width="4"/>
+                                <circle cx="0" cy="0" r="30" fill="#2C0404"/>
+                                <circle cx="0" cy="0" r="10" fill="#FF3838"/>
+                                <!-- Spikes on Shield -->
+                                <polygon points="0,-46 -6,-38 6,-38" fill="#FFD700"/>
+                                <polygon points="46,0 38,-6 38,6" fill="#FFD700"/>
+                                <polygon points="0,46 -6,38 6,38" fill="#FFD700"/>
+                                <polygon points="-46,0 -38,-6 -38,6" fill="#FFD700"/>
+                            </g>
+
+                            <!-- Effigy Skirt / Robe (Festive Ramlila Effigy Bamboo & Paper Structure) -->
+                            <path d="M135 285 L90 475 L370 475 L325 285 Z" fill="#3B112C" stroke="#D980FA" stroke-width="2.5"/>
+                            <!-- Bamboo Criss-Cross and Firecracker Fuse Lattice -->
+                            <line x1="135" y1="285" x2="370" y2="475" stroke="#FF9F43" stroke-width="2" stroke-dasharray="8 5" opacity="0.7"/>
+                            <line x1="325" y1="285" x2="90" y2="475" stroke="#FF9F43" stroke-width="2" stroke-dasharray="8 5" opacity="0.7"/>
+                            <line x1="230" y1="285" x2="230" y2="475" stroke="#FF9F43" stroke-width="2.5" opacity="0.8"/>
+
+                            <!-- Effigy Wooden Base -->
+                            <rect x="75" y="475" width="310" height="22" rx="4" fill="#3D1403" stroke="#220B00" stroke-width="2"/>
+                        </g>
+
+                        <!-- Destruction / Fire Overlay on Ravan (Triggered during Vadh) -->
+                        <g id="ravanBurnOverlay" opacity="0">
+                            <rect x="20" y="10" width="420" height="480" fill="url(#fireBurnGrad)" mix-blend-mode="color-dodge"/>
+                        </g>
+                    </svg>
+                </div>
+                <div class="name-tag ravan-tag">दशानन रावण (अहंकार)</div>
+            </div>
+
+        </div>
+
+        <!-- Action Control Panel -->
+        <div class="action-panel">
+            <!-- Shoot Arrow Button -->
+            <button id="shootBtn" class="shoot-btn glow-anim">
+                <span class="btn-icon">🏹</span>
+                <span class="btn-text">
+                    <strong>बाण चलाएं और रावण वध करें!</strong>
+                    <small>Shoot the Divine Arrow & Destroy Evil</small>
+                </span>
+                <span class="btn-glow"></span>
+            </button>
+
+            <!-- Status Indicator -->
+            <div id="battleStatus" class="battle-status">
+                <i class="fa-solid fa-scroll"></i>
+                <span id="statusMessage">तीर चलाने के लिए ऊपर दिए गए बटन को दबाएं!</span>
+            </div>
+        </div>
+
+        <!-- Share & Festive Wish Box -->
+        <div class="share-card greeting-highlight-card">
+            <div class="festive-diya-row">🪔 🪔 🪔</div>
+            <h2 class="festive-wishing-title">
+                दीपावली की बहुत-बहुत शुभकामनाएं
+            </h2>
+            <p class="festive-wishing-subtitle">
+                ✨ सुख, शांति, समृद्धि और विजय का यह पावन पर्व आपके जीवन में खुशियां भर दे ✨
+            </p>
+
+            <!-- Share Buttons Row -->
+            <div class="share-actions">
+                <button id="whatsappShareBtn" class="whatsapp-btn">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>WhatsApp पर शेयर करें</span>
+                </button>
+                <button id="copyLinkBtn" class="copy-btn">
+                    <i class="fa-solid fa-copy"></i>
+                    <span>शुभकामना लिंक कॉपी करें</span>
+                </button>
+                <button id="replayBtn" class="replay-btn" style="display: none;">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>पुनः तीर चलाएं (Replay)</span>
+                </button>
+            </div>
+
+            <!-- Toast alert for link copied -->
+            <div id="toastAlert" class="toast-alert">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>लिंक कॉपी हो गया! अब WhatsApp पर भेजें।</span>
+            </div>
+        </div>
+
+        <!-- Dussehra Shloka / Significance Card -->
+        <div class="shloka-card">
+            <div class="shloka-quote">
+                "राम रामेति रामेति रमे रामे मनोरमे।<br>
+                सहस्रनाम तत्तुल्यं रामनाम वरानने॥"
+            </div>
+            <div class="shloka-meaning">
+                दशहरा हमें सिखाता है कि बुराई कितनी भी शक्तिशाली क्यों न हो,<br>
+                सत्य और धर्म के एक तीर से उसका अंत निश्चित है।
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="festive-footer">
+            <p>जय श्री राम 🚩 विजयदशमी की हार्दिक शुभकामनाएं</p>
+        </footer>
+
+    </div>
+
+    <!-- Victory Celebration Overlay Modal (Shown after Ravan Dahan) -->
+    <div id="victoryModal" class="victory-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="closeModalBtn">&times;</button>
+            <div class="diya-decor">🪔 🪔 🪔</div>
+            <h2 class="victory-title">अधर्म पर धर्म की विजय!</h2>
+            <div class="flaming-text">रावण का अंत हुआ, सत्य की जीत हुई!</div>
+            <div class="personal-wishing-box">
+                <p id="modalWishingFrom">आपको और आपके समस्त परिवार को</p>
+                <h3 class="highlight-festival">दीपावली एवं विजयदशमी की हार्दिक शुभकामनाएं</h3>
+                <p class="wishing-blessing">
+                    प्रभु श्री राम आपके जीवन से सभी बुराइयों, बाधाओं और कष्टों का नाश करें तथा सुख, समृद्धि और यश प्रदान करें।
+                </p>
+            </div>
+            
+            <div class="modal-actions">
+                <button id="modalWhatsappBtn" class="whatsapp-btn pulse">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>यह बधाई WhatsApp पर भेजें</span>
+                </button>
+                <button id="modalCloseActionBtn" class="action-btn">
+                    <i class="fa-solid fa-arrow-rotate-right"></i>
+                    <span>उत्सव का पुनः आनंद लें</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="audio.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
